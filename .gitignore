@@ -1,0 +1,6 @@
+# .gitignore
+
+# Dependencies / build artifacts
+node_modules/
+__pycache__/
+*.pyc
