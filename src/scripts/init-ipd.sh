@@ -4,6 +4,7 @@
 # Usage: init-ipd.sh [--dir <path>] [--project <name>] [--owner <name>]
 #
 # Creates (idempotently):
+#   <dir>/AGENTS.md (root, for quick reference)
 #   <dir>/.ipd/AGENTS.md
 #   <dir>/.ipd/log.md
 #   <dir>/.ipd/nextid
@@ -130,6 +131,12 @@ if [[ ! -f "$GITIGNORE" ]] || ! grep -qF '.ipd/' "$GITIGNORE"; then
 else
   echo "[init-ipd] Skipped .gitignore (.ipd/ already present)"
 fi
+
+# ---------------------------------------------------------------------------
+# Root AGENTS.md (for quick reference)
+# ---------------------------------------------------------------------------
+cp "$IPD/AGENTS.md" "$TARGET_DIR/AGENTS.md"
+echo "[init-ipd] Created/updated root AGENTS.md"
 
 # ---------------------------------------------------------------------------
 # Done
