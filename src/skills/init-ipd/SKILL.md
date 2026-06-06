@@ -1,6 +1,6 @@
 ---
 name: init-ipd
-description: Scaffold the Ideas→Plans→Decisions (.ipd) workflow into any repository. Creates a hidden .ipd/ folder with agent manifest, templates, atomic ID counter, and scripts — gitignored by default so the project tree stays clean.
+description: Scaffold the Ideas→Plans→Decisions (.ipd) workflow into any repository. Creates a hidden .ipd/ folder with templates and scripts, plus a root AGENTS.md for quick reference — all gitignored so project tree stays clean.
 allowed-tools: shell
 ---
 
@@ -22,8 +22,9 @@ init-ipd [--dir <path>] [--project <name>] [--owner <name>]
 ## What Gets Scaffolded
 
 ```
+AGENTS.md                 ← root agent manifest (quick reference)
 .ipd/
-  AGENTS.md              ← standalone agent manifest (full workflow spec)
+  AGENTS.md              ← full workflow spec
   ideas/
     0000-template.md
   plans/

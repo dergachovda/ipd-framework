@@ -4,3 +4,6 @@
 node_modules/
 __pycache__/
 *.pyc
+
+# IPD workflow — local-only, like .vscode/ or .idea/
+.ipd/
