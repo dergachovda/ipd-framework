@@ -133,10 +133,26 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# Root AGENTS.md (for quick reference)
+# Root AGENTS.md (routing layer — project overview + workflow directory)
 # ---------------------------------------------------------------------------
-cp "$IPD/AGENTS.md" "$TARGET_DIR/AGENTS.md"
-echo "[init-ipd] Created/updated root AGENTS.md"
+if [[ ! -f "$TARGET_DIR/AGENTS.md" ]]; then
+  cp "$HOME/.ipd-framework/templates/ROOT_AGENTS.md" "$TARGET_DIR/AGENTS.md"
+  sed -i "s/{{PROJECT}}/$PROJECT/g" "$TARGET_DIR/AGENTS.md" 2>/dev/null \
+    || perl -pi -e "s/\{\{PROJECT\}\}/$PROJECT/g" "$TARGET_DIR/AGENTS.md"
+  echo "[init-ipd] Created root AGENTS.md (routing layer)"
+else
+  echo "[init-ipd] Skipped root AGENTS.md (already exists)"
+fi
+
+# ---------------------------------------------------------------------------
+# CLAUDE.md (pointer to AGENTS.md — co-agents pattern)
+# ---------------------------------------------------------------------------
+if [[ ! -f "$TARGET_DIR/CLAUDE.md" ]]; then
+  cp "$HOME/.ipd-framework/templates/CLAUDE.md" "$TARGET_DIR/CLAUDE.md"
+  echo "[init-ipd] Created CLAUDE.md (pointer to AGENTS.md)"
+else
+  echo "[init-ipd] Skipped CLAUDE.md (already exists)"
+fi
 
 # ---------------------------------------------------------------------------
 # Done
@@ -145,6 +161,8 @@ echo ""
 echo "[init-ipd] Done. IPD workflow scaffolded at: $TARGET_DIR/.ipd/"
 echo ""
 echo "  Agent manifest:  $TARGET_DIR/.ipd/AGENTS.md"
+echo "  Root routing:    $TARGET_DIR/AGENTS.md"
+echo "  Claude pointer:  $TARGET_DIR/CLAUDE.md"
 echo "  Work log:        $TARGET_DIR/.ipd/log.md"
 echo "  Claim next ID:   bash $TARGET_DIR/.ipd/scripts/get-next-ipd-id.sh"
 echo ""
