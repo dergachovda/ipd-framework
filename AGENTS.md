@@ -1,24 +1,21 @@
 # AGENTS.md — ipd-framework
 
-AI agent instructions for working in the `ipd-framework` repository itself.
+## Project Overview
 
-## Purpose
+`ipd-framework` scaffolds the IPD (Ideas → Plans → Decisions) workflow into any repository via the `init-ipd` skill.
 
-This repo scaffolds the IPD workflow into other repos. Work on it follows the same IPD pattern.
+## Available Workflows
 
-## Structure
+| Workflow | Description | Instructions |
+|----------|-------------|--------------|
+| IPD | Ideas → Plans → Decisions tracking | [.ipd/AGENTS.md](.ipd/AGENTS.md) |
 
-```
-src/skills/init-ipd/     ← Copilot CLI skill definition (SKILL.md + thin wrapper)
-src/scripts/             ← init-ipd.sh, get-next-ipd-id.sh, session-status.sh
-src/templates/           ← template files copied into target repos
-install.sh / install.ps1 ← deploy skill to ~/.copilot/skills/
-```
+## Tech Stack & Conventions
 
-## Agent Rules
+- Scripts: `bash`, portable POSIX — no external deps
+- `VERSION` — plain text semantic version; bump on release
+- `CHANGELOG.md` — follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
+- **Never commit without explicit owner approval.** Stage with `git add`, summarize, stop and wait.
+- **Commit format:** `[NNNN]: short description` — 1–7 words, lowercase, no full stop
+- When modifying `src/scripts/`, verify `src/templates/AGENTS.md` stays consistent
 
-- **Never commit without explicit owner approval.** Stage with `git add`, summarize changes, stop and wait.
-- **Commit format:** `[NNNN]: short description` — 1–7 words, lowercase, no full stop.
-- When modifying `src/scripts/` scripts, verify the corresponding `src/templates/AGENTS.md` is still consistent.
-- `VERSION` is a plain text file with one semantic version number. Bump it on release.
-- `CHANGELOG.md` follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
