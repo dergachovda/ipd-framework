@@ -19,8 +19,15 @@ All three stages share **one atomic NNNN ID** claimed at idea creation. The enti
 ### Via Copilot CLI skill (after install)
 
 ```
-init-ipd
+init-ipd                              # one-time setup — scaffolds ./.ipd/
+/ipd new "your idea title"            # runtime — claims an ID, writes idea file
+/ipd plan 0007                        # runtime — turns an idea into a plan
+/ipd work 0007                        # runtime — start working on a plan
+/ipd done 0007                        # runtime — finish: writes the ADR, updates log
+/ipd status                           # runtime — what's in progress?
 ```
+
+`init-ipd` scaffolds the folder; `ipd` (invoked as `/ipd …`) is the runtime that operates the workflow. They are complementary — `init-ipd` once per repo, then `/ipd` from then on.
 
 ### Via script
 
