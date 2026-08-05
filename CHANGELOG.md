@@ -5,6 +5,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-08-05
+
+### Changed
+- `src/skills/ipd/SKILL.md` — improved IPD skill detection to support both `.ipd/` and `ipd/` folder naming conventions. Detection now uses POSIX-compatible for-loop pattern and captures folder name for use throughout workflow. All step references now use `$ipd_dir` variable placeholder instead of hardcoded `.ipd/` paths. Removed unreliable `ls | grep` alternative method.
+
 ## [0.3.0] - 2026-07-27
 
 ### Added
