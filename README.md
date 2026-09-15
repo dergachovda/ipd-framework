@@ -12,15 +12,22 @@ Every piece of work follows a three-stage lifecycle:
 .ipd/ideas/NNNN-<slug>.md  →  .ipd/plans/NNNN-<slug>.md  →  .ipd/decisions/NNNN-<slug>.md
 ```
 
-All three stages share **one atomic NNNN ID** claimed at idea creation. The entire workflow lives in a hidden, gitignored `.ipd/` folder — like `.vscode/` or `.idea/` — so your project tree stays clean.
+All three stages share **one atomic NNNN ID** claimed at idea creation. The entire workflow lives in a hidden, locally excluded `.ipd/` folder — like `.vscode/` or `.idea/` — so your project's tracked files stay clean.
 
 ## Quick Start
 
 ### Via Copilot CLI skill (after install)
 
 ```
-init-ipd
+init-ipd                              # one-time setup — scaffolds ./.ipd/
+/ipd new "your idea title"            # runtime — claims an ID, writes idea file
+/ipd plan 0007                        # runtime — turns an idea into a plan
+/ipd work 0007                        # runtime — start working on a plan
+/ipd done 0007                        # runtime — finish: writes the ADR, updates log
+/ipd status                           # runtime — what's in progress?
 ```
+
+`init-ipd` scaffolds the folder; `ipd` (invoked as `/ipd …`) is the runtime that operates the workflow. They are complementary — `init-ipd` once per repo, then `/ipd` from then on.
 
 ### Via script
 
@@ -33,7 +40,7 @@ Both default to the current working directory.
 ## What Gets Scaffolded
 
 ```
-.ipd/                         ← gitignored by default
+.ipd/                         ← locally excluded by default
   AGENTS.md                   ← standalone agent manifest (the full workflow spec)
   ideas/
     0000-template.md
@@ -49,7 +56,7 @@ Both default to the current working directory.
   .sessions/                  ← local session claim files (transient)
 ```
 
-`.ipd/` is appended to the target repo's `.gitignore` automatically.
+`.ipd/` is added to the target repo's `.git/info/exclude` automatically. The tracked `.gitignore` is never modified.
 
 ## The Workflow (Human)
 

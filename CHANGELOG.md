@@ -5,6 +5,23 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
+### Changed
+- `src/scripts/init-ipd.sh` — add `.ipd/` to the repository-local `.git/info/exclude` instead of modifying the tracked `.gitignore`.
+
+## [0.3.1] - 2026-08-05
+
+### Changed
+- `src/skills/ipd/SKILL.md` — improved IPD skill detection to support both `.ipd/` and `ipd/` folder naming conventions. Detection now uses POSIX-compatible for-loop pattern and captures folder name for use throughout workflow. All step references now use `$ipd_dir` variable placeholder instead of hardcoded `.ipd/` paths. Removed unreliable `ls | grep` alternative method.
+
+## [0.3.0] - 2026-07-27
+
+### Added
+- `src/skills/ipd/SKILL.md` — runtime `ipd` skill. Detects a gitignored `./.ipd/AGENTS.md`, loads it as the authoritative workflow spec, and routes `/ipd <subcommand>` (`new`, `idea`, `plan`, `work`, `done`, `status`, `lint`, `fix`, `help`) to the existing `.ipd/scripts/*` tooling. When `.ipd/` is absent, prompts the user before running `init-ipd` — never auto-initializes.
+
+### Changed
+- `install.sh`, `install.ps1` — deploy the new `ipd` skill to `~/.copilot/skills/ipd/` alongside `init-ipd`.
+- Root `AGENTS.md` — now lists both shipped skills in a new **Available Skills** table.
+
 ## [0.1.3] - 2026-06-17
 
 ### Added
