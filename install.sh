@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# install.sh — deploy the ipd-framework Copilot CLI skills to ~/.copilot/skills/
+# install.sh — deploy the ipd-framework skills to Copilot CLI and Claude Code
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -15,6 +15,17 @@ chmod +x "$INIT_DEST/init-ipd.sh"
 IPD_DEST="$HOME/.copilot/skills/ipd"
 mkdir -p "$IPD_DEST"
 cp "$SCRIPT_DIR/src/skills/ipd/SKILL.md" "$IPD_DEST/SKILL.md"
+
+# Claude Code skills — use the same portable SKILL.md sources
+CLAUDE_INIT_DEST="$HOME/.claude/skills/init-ipd"
+mkdir -p "$CLAUDE_INIT_DEST"
+cp "$SCRIPT_DIR/src/skills/init-ipd/SKILL.md" "$CLAUDE_INIT_DEST/SKILL.md"
+cp "$SCRIPT_DIR/src/skills/init-ipd/init-ipd.sh" "$CLAUDE_INIT_DEST/init-ipd.sh"
+chmod +x "$CLAUDE_INIT_DEST/init-ipd.sh"
+
+CLAUDE_IPD_DEST="$HOME/.claude/skills/ipd"
+mkdir -p "$CLAUDE_IPD_DEST"
+cp "$SCRIPT_DIR/src/skills/ipd/SKILL.md" "$CLAUDE_IPD_DEST/SKILL.md"
 
 # Also install the scripts to ~/.ipd-framework/scripts/ so the skill wrapper can find them
 SCRIPTS_DEST="$HOME/.ipd-framework/scripts"
@@ -33,8 +44,11 @@ echo ""
 echo "✅ ipd-framework skills installed."
 echo "   Skills:    $INIT_DEST"
 echo "             $IPD_DEST"
+echo "   Claude:    $CLAUDE_INIT_DEST"
+echo "             $CLAUDE_IPD_DEST"
 echo "   Scripts:   $SCRIPTS_DEST"
 echo "   Templates: $TEMPLATES_DEST"
 echo ""
 echo "Open a repo and run: init-ipd   (one-time setup)"
-echo "Then operate with:   /ipd <new|plan|work|done|status|help>"
+echo "Then operate with Copilot: /ipd <new|plan|work|done|status|help>"
+echo "Or use the installed skills from Claude Code."
