@@ -1,14 +1,14 @@
 ---
 name: init-ipd
-description: Scaffold the Ideas→Plans→Decisions (.ipd) workflow into any repository. Creates a hidden .ipd/ folder with templates and scripts, plus a root AGENTS.md for quick reference — all gitignored so project tree stays clean.
+description: Scaffold the Ideas→Plans→Decisions (.ipd) workflow into any Git repository. Creates a hidden .ipd/ folder with templates and scripts, plus a root AGENTS.md for quick reference — locally excluded so project tree stays clean.
 allowed-tools: shell
 ---
 
 # init-ipd
 
-Bootstrap any repository with the AI-friendly **Ideas → Plans → Decisions** workflow.
+Bootstrap any Git repository with the AI-friendly **Ideas → Plans → Decisions** workflow.
 
-The entire workflow lives in a hidden `.ipd/` folder — gitignored like `.vscode/` or `.idea/` — so your project tree stays clean.
+The entire workflow lives in a hidden `.ipd/` folder — locally excluded through `.git/info/exclude` like `.vscode/` or `.idea/` — so the repository's tracked files stay unchanged.
 
 ## Usage
 
@@ -39,7 +39,7 @@ AGENTS.md                 ← root agent manifest (quick reference)
   .sessions/
 ```
 
-`.ipd/` is appended to the repo's `.gitignore` automatically.
+`.ipd/` is added to the repository-local `.git/info/exclude` automatically. The tracked `.gitignore` is never modified.
 
 ## Examples
 
