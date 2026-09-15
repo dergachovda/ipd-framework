@@ -5,6 +5,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
+### Changed
+- `src/scripts/init-ipd.sh` — add `.ipd/` to the repository-local `.git/info/exclude` instead of modifying the tracked `.gitignore`.
+
 ## [0.3.1] - 2026-08-05
 
 ### Changed

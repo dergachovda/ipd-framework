@@ -13,7 +13,7 @@
 #   <dir>/.ipd/ideas/0000-template.md
 #   <dir>/.ipd/plans/0000-template.md
 #   <dir>/.ipd/decisions/0000-template.md
-#   Appends ".ipd/" to <dir>/.gitignore
+#   Adds ".ipd/" to <dir>/.git/info/exclude
 set -euo pipefail
 
 # ---------------------------------------------------------------------------
@@ -37,6 +37,13 @@ TARGET_DIR="$(cd "$TARGET_DIR" && pwd)"
 IPD="$TARGET_DIR/.ipd"
 TODAY="$(date +%Y-%m-%d)"
 TEMPLATES_DIR="${BASH_SOURCE[0]%/*}"
+GIT_EXCLUDE="$(cd "$TARGET_DIR" && git rev-parse --git-path info/exclude 2>/dev/null)" || {
+  echo "[init-ipd] Error: target directory is not a Git repository: $TARGET_DIR" >&2
+  exit 1
+}
+if [[ "$GIT_EXCLUDE" != /* ]]; then
+  GIT_EXCLUDE="$TARGET_DIR/$GIT_EXCLUDE"
+fi
 # Resolve installed templates location (sibling of scripts/)
 TEMPLATES_SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")/../templates" 2>/dev/null && pwd || echo "")"
 if [[ -z "$TEMPLATES_SRC" ]]; then
@@ -122,14 +129,13 @@ for script in get-next-ipd-id.sh session-status.sh; do
 done
 
 # ---------------------------------------------------------------------------
-# .gitignore
+# .git/info/exclude
 # ---------------------------------------------------------------------------
-GITIGNORE="$TARGET_DIR/.gitignore"
-if [[ ! -f "$GITIGNORE" ]] || ! grep -qF '.ipd/' "$GITIGNORE"; then
-  printf '\n# IPD workflow — local-only, like .vscode/ or .idea/\n.ipd/\n' >> "$GITIGNORE"
-  echo "[init-ipd] Added .ipd/ to .gitignore"
+if ! grep -qE '^[[:space:]]*\.ipd/?[[:space:]]*$' "$GIT_EXCLUDE" 2>/dev/null; then
+  printf '\n# IPD workflow — local-only, like .vscode/ or .idea/\n.ipd/\n' >> "$GIT_EXCLUDE"
+  echo "[init-ipd] Added .ipd/ to .git/info/exclude"
 else
-  echo "[init-ipd] Skipped .gitignore (.ipd/ already present)"
+  echo "[init-ipd] Skipped .git/info/exclude (.ipd/ already present)"
 fi
 
 # ---------------------------------------------------------------------------

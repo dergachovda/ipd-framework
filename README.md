@@ -12,7 +12,7 @@ Every piece of work follows a three-stage lifecycle:
 .ipd/ideas/NNNN-<slug>.md  →  .ipd/plans/NNNN-<slug>.md  →  .ipd/decisions/NNNN-<slug>.md
 ```
 
-All three stages share **one atomic NNNN ID** claimed at idea creation. The entire workflow lives in a hidden, gitignored `.ipd/` folder — like `.vscode/` or `.idea/` — so your project tree stays clean.
+All three stages share **one atomic NNNN ID** claimed at idea creation. The entire workflow lives in a hidden, locally excluded `.ipd/` folder — like `.vscode/` or `.idea/` — so your project's tracked files stay clean.
 
 ## Quick Start
 
@@ -40,7 +40,7 @@ Both default to the current working directory.
 ## What Gets Scaffolded
 
 ```
-.ipd/                         ← gitignored by default
+.ipd/                         ← locally excluded by default
   AGENTS.md                   ← standalone agent manifest (the full workflow spec)
   ideas/
     0000-template.md
@@ -56,7 +56,7 @@ Both default to the current working directory.
   .sessions/                  ← local session claim files (transient)
 ```
 
-`.ipd/` is appended to the target repo's `.gitignore` automatically.
+`.ipd/` is added to the target repo's `.git/info/exclude` automatically. The tracked `.gitignore` is never modified.
 
 ## The Workflow (Human)
 
