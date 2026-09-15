@@ -80,9 +80,14 @@ The full agent rules live in `.ipd/AGENTS.md` — the LLM reads that file to kno
 ## Install
 
 ```bash
-# Copy the init-ipd skill to ~/.copilot/skills/
+# Install the skills for Copilot CLI and Claude Code
 bash install.sh
 ```
+
+The installer is idempotent and installs both `init-ipd` and `ipd` into
+`~/.copilot/skills/` and `~/.claude/skills/`. Shared scripts and templates are
+installed under `~/.ipd-framework/`. Existing unrelated skills in either
+directory are preserved.
 
 ## Commit Convention
 
